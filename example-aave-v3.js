@@ -1,4 +1,5 @@
-const { startMoralis, getAllV3Reserves, getV3ReserveDataOfAddress, getV3ATokenTotalSupply } = require("./aave");
+const { getAllV3Reserves, getV3ReserveDataOfAddress, getV3ATokenTotalSupply } = require("./aave");
+const { startMoralis } = require("./moralis-connector");
 
 async function run() {
   await startMoralis();

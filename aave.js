@@ -14,15 +14,6 @@ const RAY = 10 ** 27 //I don't know where this number comes from. Got this from 
 const SECONDS_PER_YEAR = 31536000
 
 
-/* Hamdi's Moralis free API key */
-const serverUrl = "https://xd3mlg32ftmi.usemoralis.com:2053/server";
-const appId = "Y0wHemuqcWaeMjuXggzi5yidwzltcZE9Aehh3YWF";
-const masterKey = "nrc5vEYuIMNzUPIJNM7pIdHp5IkFnFxLkpzKw4HR";
-
-async function startMoralis() {
-  await Moralis.start({ serverUrl, appId, masterKey });
-}
-
 /**
  * Calculate APY from APR. Formula taken from here https://docs.aave.com/developers/v/2.0/guides/apy-and-apr
  * @param number aprValue
@@ -203,4 +194,4 @@ async function getV3ReserveDataOfAddress(assetAddress, symbol, chainId) {
 
 
 
-module.exports = { calculateApyFromApr, getAllV2Reserves, getV2ATokenTotalSupply, getV2ReserveDataOfAddress, getAllV3Reserves, getV3ATokenTotalSupply, getV3ReserveDataOfAddress, startMoralis }
+module.exports = { calculateApyFromApr, getAllV2Reserves, getV2ATokenTotalSupply, getV2ReserveDataOfAddress, getAllV3Reserves, getV3ATokenTotalSupply, getV3ReserveDataOfAddress }
