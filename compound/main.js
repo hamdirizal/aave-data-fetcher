@@ -1,7 +1,7 @@
 /* import moralis */
 const Moralis = require("moralis/node");
 
-const { startMoralis } = require("./moralis-connector");
+const { startMoralis } = require("../moralis-connector");
 
 const CompoundConfig = require('./compound-mainnet.json')
 const CompoundAbi = require('./compound-mainnet-abi.json')
@@ -123,22 +123,5 @@ async function getAllData() {
   return resultsArr;
 }
 
-async function run() {
 
-  await startMoralis();
-  const resultsArr = await getAllData();
-  console.log(resultsArr)
-
-
-
-  // const supplyRatePerBlock = await getSupplyRatePerBlock('eth', CompoundConfig.Contracts[assets[0]], CompoundAbi[assets[0]])
-  // console.log(supplyRatePerBlock);
-  // const supplyApy = calculateSupplyApy(supplyRatePerBlock);
-  // console.log(supplyApy);
-
-  // const dilutedMarketCap = await getDilutedMarketCap('eth', CompoundConfig.Contracts[assets[6]], CompoundAbi[assets[6]])
-  // console.log('dilutedMarketCap', dilutedMarketCap)
-
-}
-
-run();
+module.exports = { getAllData }
