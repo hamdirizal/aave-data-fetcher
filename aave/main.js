@@ -190,8 +190,41 @@ async function getV3ReserveDataOfAddress(assetAddress, symbol, chainId) {
   }
 }
 
+async function getAllV2Data(chainId) {
+  const v2Reserves = await getAllV2Reserves(chainId);
+  v2Reserves.length = 2; //For demo, take only two items. Remove this line to get all of the assets. But it will take time to load.
+  let arr = [];
+  await Promise.all(v2Reserves.map(async (obj) => {
+    const info = await (getV2ReserveDataOfAddress(obj.address, obj.symbol, chainId))
+
+    //Injecting the total supply
+    if (info && info.aTokenAddress) {
+      info.totalSupply = await (getV2ATokenTotalSupply(info.aTokenAddress, chainId))
+    }
+
+    arr.push(info)
+  }));
+  return arr;
+}
 
 
+async function getAllV3Data() {
+  const chainId = 'polygon';
+  const v3Reserves = await getAllV3Reserves(chainId);
+  v3Reserves.length = 2; //For demo, take only two items. Remove this line to load all. But it will take time to load.
+  let arr = [];
+  await Promise.all(v3Reserves.map(async (obj) => {
+    const info = await (getV3ReserveDataOfAddress(obj.address, obj.symbol, chainId))
+
+    //Injecting the total supply
+    if (info && info.aTokenAddress) {
+      info.totalSupply = await (getV3ATokenTotalSupply(info.aTokenAddress, chainId))
+    }
+
+    arr.push(info)
+  }));
+  return arr;
+}
 
 
-module.exports = { calculateApyFromApr, getAllV2Reserves, getV2ATokenTotalSupply, getV2ReserveDataOfAddress, getAllV3Reserves, getV3ATokenTotalSupply, getV3ReserveDataOfAddress }
+module.exports = { calculateApyFromApr, getAllV2Reserves, getV2ATokenTotalSupply, getV2ReserveDataOfAddress, getAllV3Reserves, getV3ATokenTotalSupply, getV3ReserveDataOfAddress, getAllV2Data, getAllV3Data }
